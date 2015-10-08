@@ -117,7 +117,9 @@ public class RobotImage {
 	
 	public void changeRobot(String fileName)
 	{
-		fileName += ".robi";
+		if(!fileName.contains(".robi")) 
+			fileName += ".robi"; 
+		
 		try 
 		{
 			FileInputStream fis =  new FileInputStream(fileName);
