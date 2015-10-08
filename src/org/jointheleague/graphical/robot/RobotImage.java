@@ -91,7 +91,7 @@ public class RobotImage {
 		loadDefaultRobot("rob");
 	}
 	
-	private void loadDefaultRobot(String s)
+	void loadDefaultRobot(String s)
 	{
 		s += ".robi";
 		

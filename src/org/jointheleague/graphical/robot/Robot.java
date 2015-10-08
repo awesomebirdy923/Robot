@@ -20,6 +20,19 @@ public class Robot implements ActionListener{
 	private boolean isTurning;
 	
 	private float xPos;
+	
+	public int getX() {
+		return (int) xPos;
+	}
+
+	public int getY() {
+		return (int) yPos;
+	}
+	
+	public RobotWindow getWindow() {
+		return this.window;
+	}
+
 	private float yPos;
 	private int angle;
 	private int newAngle;
@@ -219,7 +232,8 @@ public class Robot implements ActionListener{
 	
 	public void changeRobot(String fileName)
 	{
-		rImage.changeRobot(fileName);
+		rImage.loadDefaultRobot(fileName);
+		//rImage.changeRobot(fileName);
 		window.update(this);
 	}
 	
