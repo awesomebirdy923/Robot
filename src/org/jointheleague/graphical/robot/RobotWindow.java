@@ -2,6 +2,8 @@ package org.jointheleague.graphical.robot;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +11,9 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class RobotWindow extends JPanel{
+public class RobotWindow extends JPanel implements ActionListener{
 	/**
 	 * 
 	 */
@@ -31,6 +34,10 @@ public class RobotWindow extends JPanel{
 	private static int imgY;
 	private static BufferedImage leagueLogo;
 	
+	static int ROBOT_COUNT = 0;
+	
+	private Timer updateTimer;
+	
 	public RobotWindow(int w, int h, Color c)
 	{
 		width = w;
@@ -49,6 +56,10 @@ public class RobotWindow extends JPanel{
 		imgX = ((width / 2) - (IMG_WIDTH / 2)) + 740;
 		imgY = ((height / 2) - (IMG_HEIGHT / 2)) - 410;
 		
+		updateTimer = new Timer(1000 / 60, this);
+		
+		updateTimer.start();
+		
 		try {
 			leagueLogo = ImageIO.read(this.getClass().getResourceAsStream("league_logo.png"));
 		} catch (IOException e) 
@@ -60,7 +71,6 @@ public class RobotWindow extends JPanel{
 	public void setWinColor(Color c)
 	{
 		winColor = c;
-		repaint();
 	}
 
 	public void paint(Graphics g)
@@ -74,19 +84,17 @@ public class RobotWindow extends JPanel{
 		for(int i = 0; i < robotList.size(); i++)
 		{
 			Robot r = robotList.get(i);
-			r.draw(g2);
+			r.update(g2);
 		}
 	}
 	
 	public void addRobot(Robot r)
 	{
 		robotList.add(r);
-		update(r);
+		ROBOT_COUNT++;
 	}
-	
-	public void update(Robot r)
-	{
-		r.update();
+
+	public void actionPerformed(ActionEvent arg0) {
 		repaint();
 	}
 }

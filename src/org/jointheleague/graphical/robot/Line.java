@@ -38,4 +38,12 @@ public class Line {
 		g.drawLine(startX, startY, endX, endY);
 		g2.setStroke(s);
 	}
+	
+	public int getEndX() {
+		return endX;
+	}
+	
+	public int getEndY() {
+		return endY;
+	}
 }
